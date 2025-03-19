@@ -1,3 +1,15 @@
+# demo, ignore main dir-s
+tests
+output
+models
+bot
+
+config.py
+TinkoffService.py
+
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
