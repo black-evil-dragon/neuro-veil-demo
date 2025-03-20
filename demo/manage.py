@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 from veil.neuro.model import NeuroModel
 from veil.neuro.model.lstm import LstmModel
 
@@ -6,6 +7,7 @@ from veil.tinkoff.data import InstrumentDataModel, TinkoffDataModel
 
 from veil.utils.config import SANDBOX_TOKEN
 from veil.utils.logger import setup_logger
+from veil.utils.time import now
 
 
 log = setup_logger()
@@ -120,17 +122,19 @@ if __name__ == "__main__":
 
     # *______________________________________________________________________________
     # *| Fetch data and save                                                        |
+    GET_DATA_ARGS = dict(
+        candleIntervalType=manager.marketDataService.CandleInterval.ONE_HOUR,
+        indicatorIntervalType=manager.marketDataService.IndicatorIntervalType.ONE_HOUR,
+
+        additional_instruments=[
+            dollar,
+            moex
+        ]
+    )
     # tinkoff_data = manager.tinkoffDataModel.get_data(
     #     from_date=now() - timedelta(days=3000),
     #     to_date=now(),
-
-    #     candleIntervalType=manager.marketDataService.CandleInterval.ONE_HOUR,
-    #     indicatorIntervalType=manager.marketDataService.IndicatorIntervalType.ONE_HOUR,
-
-    #     additional_instruments=[
-    #         dollar,
-    #         moex
-    #     ]
+    #     **GET_DATA_ARGS
     # )
     # log.debug(f'Итого данных: {len(tinkoff_data)} ({tbank.get("ticker")})')
     # InstrumentDataModel.save_to_json(tinkoff_data, filename="tbank/full.json", indent=4)
@@ -141,7 +145,17 @@ if __name__ == "__main__":
     # *______________________________________________________________________________
     # *| Load data                                                                  |
     tinkoff_data = InstrumentDataModel.load_from_json(filename="tbank/full.json")
+    
+    # Update data
+    tinkoff_data = manager.tinkoffDataModel.update_data(
+        initial_data=tinkoff_data,
+        **GET_DATA_ARGS
+    )
+
+
+
     log.debug(f"Итого данных: {len(tinkoff_data)} ({tbank.get('ticker')})")
+    exit()
     # *|____________________________________________________________________________|
 
 
