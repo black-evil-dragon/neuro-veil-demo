@@ -30,8 +30,6 @@ def catch(func):
             log.exception(f'Ошибка!\t{error}')
     return wrapper
 
-
-
 class Session:
     def __init__(self, url: str, token: str):
         self.url = url
@@ -56,5 +54,5 @@ class Session:
         response = self.session.post(url, data=data, json=data)
 
         if response.status_code != 200:
-            raise Exception('Error: Статус ответа не равен 200')
+            raise Exception('Статус ответа не равен 200')
         return response

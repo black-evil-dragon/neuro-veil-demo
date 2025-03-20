@@ -1,8 +1,7 @@
-from data import InstrumentDataModel
+from veil.utils.logger import get_logger
 
-from utils.logger import get_logger
-
-from services import TinkoffService
+from veil.tinkoff.services import TinkoffService
+from veil.tinkoff.data import InstrumentDataModel
 
 
 log = get_logger()

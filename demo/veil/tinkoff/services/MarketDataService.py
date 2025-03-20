@@ -1,10 +1,7 @@
 import json
-import typing
 
-import requests
-
-from services import TinkoffService
-from utils.time import now, now_str, prepare_date
+from veil.tinkoff.services import TinkoffService
+from veil.utils.time import now, prepare_date
 
 
 class MarketDataService:

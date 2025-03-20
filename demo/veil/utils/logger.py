@@ -11,7 +11,7 @@ def setup_logger():
     logger.setLevel(logging.DEBUG)
 
     # Формат логов
-    formatter = logging.Formatter("[%(asctime)s] [%(levelname)s] %(message)s")
+    formatter = logging.Formatter("[%(asctime)s] [%(levelname)s]\t%(message)s")
 
     # Логирование в консоль
     console_handler = logging.StreamHandler()

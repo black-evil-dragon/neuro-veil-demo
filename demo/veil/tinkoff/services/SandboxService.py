@@ -2,7 +2,7 @@
 
 import json
 
-from services import TinkoffService
+from veil.tinkoff.services import TinkoffService
 
 
 class SandboxService:

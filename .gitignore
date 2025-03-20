@@ -1,13 +1,13 @@
 # demo, ignore main dir-s
 tests
 output
-models
 bot
 
 config.py
 TinkoffService.py
-
-
+lstm.py
+common.py
+deprecated.py
 
 
 # Byte-compiled / optimized / DLL files
